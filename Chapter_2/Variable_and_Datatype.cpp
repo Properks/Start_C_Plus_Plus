@@ -1,14 +1,11 @@
 #include <iostream>
+#include <bitset> // For output binary form
+
 using namespace std;
 
 int main()
 {
-    cout << "char : " << sizeof(char) << "byte.\n";
-    cout << "short : " << sizeof(short) << "byte.\n";
-    cout << "int : " << sizeof(int) << "byte.\n";
-    cout << "long : " << sizeof(long) << "byte.\n";
-    cout << "unsigned : " << sizeof(unsigned) << "byte.\n";
-    cout << "float : " << sizeof(float) << "byte.\n";
-    cout << "double : " << sizeof(double) << "byte.\n";
-    cout << "long double : " << sizeof(long double) << "byte.\n";
+    const double j = 00000011; // not Binary, This is Octal ex) 00000011 = 9
+    cout << "number is " << j << endl;
+    cout << "number is " << bitset<4>(j) << endl; // output binary form with 4 size
 }
