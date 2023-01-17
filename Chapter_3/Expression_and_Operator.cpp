@@ -3,19 +3,12 @@ using namespace std;
 
 int main()
 {
-    int value1;
-    char spc = ' '; // Decalre a valuable
+    int value1; // Declare valuable
+    cout << "Enter one number!! "; // Input one number
+    cin >> value1;
 
-    cout << "Press three-digits number!! ";
-    cin >> value1; // Input three-digits number
-
-    cout << value1 << " is ";
-
-    cout << (value1 / 100) << spc;
-    value1 %= 100; // Output number that hundred's place number and delete it from valuable
-
-    cout << (value1 / 10) << spc;
-    value1 %= 10; // Output number that ten's place number and delete it from valuable
-
-    cout << value1 << endl; // Output last number
+    cout << value1;
+    cout << " is " << ((value1 > 0) ? "Positive number" : (value1 == 0) ? "Zero" : "Negative number");
+    // Check the number is positive or not with conditional operator. if not,check it is zero or negative again and output result. 
+    cout << endl;
 }
