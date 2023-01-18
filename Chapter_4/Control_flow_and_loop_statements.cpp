@@ -3,32 +3,18 @@ using namespace std;
 
 int main()
 {
-    int value1, value2, value3;
-    cout << "Enter three numbers : ";
-    cin >> value1 >> value2 >> value3;
+    char level; // Declare valuable
+    cout << "Enter your class (VIP : 1, Premium : 2, Normal : 3): "; // Input class
+    cin >> level;
 
-    cout << "The largest number is ";
+    cout << level << endl;
 
-    if (value1 < value2)
+    cout << "You can use "; // Output sentence following class
+    switch (level) // if you didn't use break, All code that below the case run 
     {
-        if (value2 < value3)
-        {
-            cout << value3 << endl;
-        }
-        else
-        {
-            cout << value2 << endl;
-        }
-    }
-    else
-    {
-        if (value1 < value3)
-        {
-            cout << value3 << endl;
-        }
-        else
-        {
-            cout << value1 << endl;
-        }
+        case '1' : cout << "Rooftop, yard, ";
+        case '2' : cout << "Second floor, ";
+        case '3' : cout << "First floor" << endl; break;
+        default : cout << "Nothing" << endl; break;
     }
 }
