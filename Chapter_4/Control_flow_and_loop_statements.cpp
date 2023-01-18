@@ -3,18 +3,18 @@ using namespace std;
 
 int main()
 {
-    char level; // Declare valuable
-    cout << "Enter your class (VIP : 1, Premium : 2, Normal : 3): "; // Input class
-    cin >> level;
-
-    cout << level << endl;
-
-    cout << "You can use "; // Output sentence following class
-    switch (level) // if you didn't use break, All code that below the case run 
+    int number = 1, index = 1, multiple; // Declare valuable
+    while (number < 10) // Make rows
     {
-        case '1' : cout << "Rooftop, yard, ";
-        case '2' : cout << "Second floor, ";
-        case '3' : cout << "First floor" << endl; break;
-        default : cout << "Nothing" << endl; break;
+        while(index < 10) // Make lines
+        {
+            multiple = number * index; // Multiplies
+            cout << number << "X" << index << "=" << ((multiple >= 10) ? "" : " ") << multiple << "\t";
+            // Output multiplies with conditonal operator
+            index += 1;
+        }
+        index = 1; // reset index
+        cout << endl;
+        number += 1;
     }
 }
