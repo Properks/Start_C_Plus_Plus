@@ -1,4 +1,4 @@
-#include <iostream>
+#include "operator.h"
 using namespace std;
 
 int factorial(int value)
@@ -9,7 +9,7 @@ int factorial(int value)
     }
     else
     {
-        return value *= factorial(value-1);
+        return Multiply(value, factorial(value - 1));
     }
 }
 
