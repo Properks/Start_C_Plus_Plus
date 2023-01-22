@@ -1,31 +1,15 @@
 #include <iostream>
 using namespace std;
 
-void Absolute_value(int &value)
+int factorial(int value)
 {
-    if (value >= 0)
+    if (value <= 0)
     {
-        value = ((value == 0) ? 0 : value);
+        return 1;
     }
     else
     {
-        value =((-1) * value);
-    }
-}
-
-void largest_number_under_hundred(int *value)
-{
-    for (int i = 2; *value < 100; i++)
-    {
-        if ((*value * i) < 100)
-        {
-            continue;
-        }
-        else
-        {
-            *value *= i-1;
-            break;
-        }
+        return value *= factorial(value-1);
     }
 }
 
@@ -36,11 +20,13 @@ int main()
     cout << "Enter a number : ";
     cin >> num1;
 
-    Absolute_value(num1);
-    cout << "Absolute number of this number is " << num1 <<endl;
-
-    largest_number_under_hundred(&num1);
-    cout << "Largest number under a hundred that multiplication of number is : " << num1 << endl;
-
+    if (num1 < 0)
+    {
+        cout << "Please enter positive number" << endl;
+    }
+    else
+    {
+        cout << num1 << "! is " << factorial(num1) << endl;
+    }
     return 0;
 }
