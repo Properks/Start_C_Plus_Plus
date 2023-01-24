@@ -1,35 +1,27 @@
 #include <iostream>
 using namespace std;
 
-int Count() // count number with static valuable
+int Compare(int *Array)
 {
-    static int count = 0;
-    ++count;
-    return count;
-}
-
-void Enter_password(int &user)
-{
-    cout << "\nEnter your password (8 numbers) : ";
-    cin >> user;
+    int largest = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        if (largest < *(Array + i))
+        {
+            largest = *(Array + i);
+        }
+    }
+    return largest;
 }
 
 int main()
 {
-    int password = 20230123, user;
-    for (int i = 0; i < 100; i++)
+    int Array[10];
+    cout << "Enter 10 numbers : ";
+    for (int i = 0; i < 10; i++)
     {
-        Enter_password(user);
-        if (user == password)
-        {
-            cout << "Log-in Succeed" << endl;
-            break;
-        }
-        else
-        {
-            cout << "Incorrect " << Count() << " times" << endl;
-            continue;
-        }
+        cin >> Array[i];
     }
+    cout << "The largest number is " << Compare(Array) << endl;
     return 0;
 }
