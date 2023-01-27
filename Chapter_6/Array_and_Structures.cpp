@@ -2,30 +2,30 @@
 #include <string>
 using namespace std;
 
-char* compare(char array[][11]) // return pointer for array
+int Find_count_of_character(char array[1024], char character) // Array and character were inputed
 {
-    int max = 0;
-
-    for (int i = 1; i < 5; i++)
+    int count = 0;
+    char *Save_string = array; // Declare pointer with string inputed
+    while (strchr(Save_string,character) != NULL) // If string doesn't have chracter, it will break
     {
-        if ((strcmp(array[max], array[i]) < 0)) // compare two string with strcmp in string
-        {
-            max = i;
-        }
+        Save_string = strchr(Save_string, character); // Find character in string
+        Save_string = strchr(Save_string, *(Save_string+1)); // Remove first character in string in order not to do infinite loop
+        count++;
     }
-
-    return array[max]; // return of the largest string 
+    return count;
 }
+
 int main()
 {
-    char str[5][11];
-    cout << "Enter 5 string" << endl;
-    for (int i = 0; i < 5; i++)
-    {
-        cout << i+1 << " string : ";
-        cin >> str[i];
-    }
+    char String[1024], Find_character;
 
-    cout << "The largest string is " << compare(str) << endl;
+    cout << "Enter a sentence in English (len = 1024) : ";
+    cin.getline(String,1024); // input with cin.getline in order to include space bar
+    cout << "Enter a character that you want to find : ";
+    cin >> Find_character;
+
+    cout << "Count of " << Find_character << " in \"" << String <<  "\" is " 
+    << Find_count_of_character(String, Find_character) << endl;
+    
     return 0;
 }
