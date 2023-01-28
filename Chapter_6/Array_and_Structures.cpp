@@ -5,14 +5,19 @@ using namespace std;
 
 struct Score
 {
-    char name[16];
-    long Student_ID;
     int Korea;
     int Math;
     int English;
 };
 
-struct Score Array[2];
+struct Data
+{
+    char name[16];
+    long Student_ID;
+    struct Score score;
+};
+
+struct Data Array[2];
 
 void input()
 {
@@ -23,11 +28,11 @@ void input()
         cout << "Enter student's ID : ";
         cin >> Array[i].Student_ID;
         cout << "Enter student's Korea score : ";
-        cin >> Array[i].Korea;
+        cin >> Array[i].score.Korea;
         cout << "Enter student's Math score : ";
-        cin >> Array[i].Math;
+        cin >> Array[i].score.Math;
         cout << "Enter student's English score : ";
-        cin >> Array[i].English;
+        cin >> Array[i].score.English;
     }
     // cout << "Enter student's name : ";
     // cin >> Array[0].name;
@@ -61,8 +66,8 @@ int main()
     for (int i = 0; i < 2; i++)
     {
         cout << Array[i].name << "(" << Array[i].Student_ID << ") : " << 
-        Array[i].Korea <<","<< Array[i].Math <<","<< Array[i].English << endl 
-        << "Average score : " << (Array[i].Korea + Array[i].Math + Array[i].English)/3 << endl;
+        Array[i].score.Korea <<","<< Array[i].score.Math <<","<< Array[i].score.English << endl 
+        << "Average score : " << (Array[i].score.Korea + Array[i].score.Math + Array[i].score.English)/3 << endl;
     }
     // cout << Array[0].name << "(" << Array[0].Student_ID << ") : " << 
     // Array[0].Korea <<","<< Array[0].Math <<","<< Array[0].English << endl 
