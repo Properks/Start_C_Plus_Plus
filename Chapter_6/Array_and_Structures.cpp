@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
 using namespace std;
 
@@ -19,20 +18,20 @@ struct Data
 
 struct Data Array[2];
 
-void input()
+void input(struct Data *d)
 {
     for (int i = 0; i < 2; i++)
     {
         cout << "Enter student's name : ";
-        cin >> Array[i].name;
+        cin >> (d+i) -> name;
         cout << "Enter student's ID : ";
-        cin >> Array[i].Student_ID;
+        cin >> (d+i) -> Student_ID;
         cout << "Enter student's Korea score : ";
-        cin >> Array[i].score.Korea;
+        cin >> (d+i) -> score.Korea;
         cout << "Enter student's Math score : ";
-        cin >> Array[i].score.Math;
+        cin >> (d+i) -> score.Math;
         cout << "Enter student's English score : ";
-        cin >> Array[i].score.English;
+        cin >> (d+i) -> score.English;
     }
     // cout << "Enter student's name : ";
     // cin >> Array[0].name;
@@ -59,7 +58,7 @@ void input()
 
 int main()
 {
-    input();
+    input(Array);
 
     cout << "------------------------------------" << endl;
 
