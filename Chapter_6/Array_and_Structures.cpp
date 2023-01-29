@@ -2,28 +2,23 @@
 #include <string>
 using namespace std;
 
-struct Score
-{
-    int Korea;
-    int Math;
-    int English;
-};
-
-struct Data
+struct Data // Declare nested structure
 {
     char name[16];
     long Student_ID;
-    struct Score score;
+    struct Score
+    {
+        int Korea;
+        int Math;
+        int English;
+    }score;
 };
-
-struct Data Array[2];
-
-void input(struct Data *d)
+void input(struct Data *d) // Inputed with structure pointer
 {
     for (int i = 0; i < 2; i++)
     {
         cout << "Enter student's name : ";
-        cin >> (d+i) -> name;
+        cin >> (d+i) -> name;   // (Address form of pointer) -> valuable in structure
         cout << "Enter student's ID : ";
         cin >> (d+i) -> Student_ID;
         cout << "Enter student's Korea score : ";
@@ -33,47 +28,20 @@ void input(struct Data *d)
         cout << "Enter student's English score : ";
         cin >> (d+i) -> score.English;
     }
-    // cout << "Enter student's name : ";
-    // cin >> Array[0].name;
-    // cout << "Enter student's ID : ";
-    // cin >> Array[0].Student_ID;
-    // cout << "Enter student's Korea score : ";
-    // cin >> Array[0].Korea;
-    // cout << "Enter student's Math score : ";
-    // cin >> Array[0].Math;
-    // cout << "Enter student's English score : ";
-    // cin >> Array[0].English;
-
-    // cout << "Enter student's name : ";
-    // cin >> Array[1].name;
-    // cout << "Enter student's ID : ";
-    // cin >> Array[1].Student_ID;
-    // cout << "Enter student's Korea score : ";
-    // cin >> Array[1].Korea;
-    // cout << "Enter student's Math score : ";
-    // cin >> Array[1].Math;
-    // cout << "Enter student's English score : ";
-    // cin >> Array[1].English;
 }
 
 int main()
 {
-    input(Array);
+    struct Data Array[2]; // Two student
+    input(Array); // Input address of Array[2]
 
     cout << "------------------------------------" << endl;
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 2; i++) // output
     {
         cout << Array[i].name << "(" << Array[i].Student_ID << ") : " << 
         Array[i].score.Korea <<","<< Array[i].score.Math <<","<< Array[i].score.English << endl 
         << "Average score : " << (Array[i].score.Korea + Array[i].score.Math + Array[i].score.English)/3 << endl;
     }
-    // cout << Array[0].name << "(" << Array[0].Student_ID << ") : " << 
-    // Array[0].Korea <<","<< Array[0].Math <<","<< Array[0].English << endl 
-    // << "Average score : " << (Array[0].Korea + Array[0].Math + Array[0].English)/3 << endl;
-    
-    // cout << Array[1].name << "(" << Array[1].Student_ID << ") : " << 
-    // Array[1].Korea <<","<< Array[1].Math <<","<< Array[1].English << endl 
-    // << "Average score : " << (Array[1].Korea + Array[1].Math + Array[1].English)/3 << endl;
     return 0;
 }
