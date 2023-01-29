@@ -1,10 +1,31 @@
 #include <iostream>
-#include <string>
 using namespace std;
+
+void Filling_Alphabet(char **array, int Row, int Col)
+{
+    int num1 = 65; // =='A'
+    for (int i = 0; i < Row; i++)
+    {
+        for (int j = 0; j < Col; j++)
+        {
+            array[i][j] = num1;
+            num1++;
+            if (num1 == 91) // == '[' == 'z' + 1
+            {
+                num1 = 97; // == 'a'
+            }
+            if (num1 > 122) //  == 'z'
+            {
+                num1 = 65;
+            }
+        }
+        
+    }
+}
 
 int main()
 {
-    int Row, Col, num1 = 65;
+    int Row, Col;
     char **Array;
 
     cout << "Enter a Row : ";
@@ -18,23 +39,9 @@ int main()
         Array[i] = new char(Col);
     }
 
-    for (int i = 0; i < Row; i++)
-    {
-        for (int j = 0; j < Col; j++)
-        {
-            Array[i][j] = num1;
-            num1++;
-            if (num1 == 91)
-            {
-                num1 = 97;
-            }
-            if (num1 > 122)
-            {
-                num1 = 65;
-            }
-        }
-        
-    }
+    Filling_Alphabet(Array, Row, Col); // Have to input char **array form. So, I inputed Address of row array
+    // If I want to input column array to function, I'll change char *array form 
+
     for (int i = 0; i < Row; i++) // output multi-dimensional Array
     {
         for (int j = 0; j < Col; j++)
@@ -50,7 +57,6 @@ int main()
         delete [] Array[i];
     }
     delete [] Array; // delete row memory
-    
-    
+
     return 0;
 }
