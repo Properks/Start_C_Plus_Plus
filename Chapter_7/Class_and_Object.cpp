@@ -1,32 +1,75 @@
 #include <iostream>
-#include <cmath>
+#include <string>
 using namespace std;
 
-class Circle
+class Privacy_Data
 {
-private:
-    double Pi;
+private:  // Declare class valuable
+    int age;
+    char *name;
+    char *ID;
+    char *Password;
 public:
-    double lenth(double radius)
+    void Person_name(char *string) // Save inputed string in name
     {
-        Pi = 3.14;
-        return 2 * radius * Pi;
+        int len = strlen(string) + 1;
+        name = new char [len];
+        strcpy(name, string);
     }
-    double square(double radius)
+    void Person_ID(char *string) // Save inputed string in ID
     {
-        Pi = 3.14;
-        return pow(radius, 2) * Pi;
+        int len = strlen(string) + 1;
+        ID = new char [len];
+        strcpy(ID, string);
     }
-}fomula;
+    void Person_Password(char *string) // Save inputed string in Password
+    {
+        int len = strlen(string) + 1;
+        Password = new char [len];
+        strcpy(Password, string);
+    }
+    void Person_age(int Age) // Save inputed number in name
+    {
+        age = Age;
+    }
+    void output() // output Data
+    {
+        cout << name << endl;
+        cout << ID << endl;
+        cout << Password << endl;
+        // delete [] name;      If you write like this and this project is bigger than now,
+        // delete [] ID;        No data in (Man1).name, (Man1).ID, (Man1).Password
+        // delete [] Password;
+    }
+}input, Man1, Man2, Man3;
 
 int main()
 {
-    double radius;
-    cout << "Enter a radius : ";
-    cin >> radius;
+    char String[1024]; // I will input string into only this array
+    int age;
 
-    cout << "Lenth of circle have " << radius << " radius is "<< fomula.lenth(radius) << endl;
-    cout << "Square of circle have " << radius << " radius is "<< fomula.square(radius) << endl;
+    cout << "Enter your age : ";
+    cin >> age;
+    if (age < 14) // If age is under 14, Can't continue
+    {
+        cout << "Sorry, You can't sign up, because your age is under 14" << endl;
+        return 0; // escape main function
+    }
+    input.Person_age(age);
+    cout << "Enter your name : ";
+    cin >> String;
+    input.Person_name(String);
+       
+    cout << "Enter your ID : ";
+    cin >> String;
+    input.Person_ID(String);
+
+    cout << "Enter your Password : ";
+    cin >> String;
+    input.Person_Password(String);
+
+    Man1 = input; // Copy class valuable(input) to Man1
+    // Man1.output();
 
     return 0;
 }
