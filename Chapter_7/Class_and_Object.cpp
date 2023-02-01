@@ -5,43 +5,50 @@ using namespace std;
 class Sum_5_numbers
 {
 private:
-    int sum;
-    int numbers[5];
+    int sum, *numbersPTR;
+    int number_of_numbers;
 public:
-    void Get_numbers()
+    void Get_numbers(int num)
     {
         int data;
-        cout << "Enter 5 numbers : ";
-        for (int i = 0; i < 5; i++)
+        number_of_numbers = num;
+        numbersPTR = new int [num];
+        cout << "Enter " << num << " numbers : ";
+        for (int i = 0; i < num; i++)
         {
             cin >> data;
-            numbers[i] = data;
+            *(numbersPTR+i) = data;
         }
     }
     int Sum_numbers()
     {
         sum = 0;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < number_of_numbers; i++)
         {
-            sum += numbers[i];
+            sum += *(numbersPTR+i);
         }
         return sum;
     }
     void output()
     {
         cout << "The sum of ";
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < number_of_numbers - 1; i++)
         {
-            cout << numbers[i] << ", ";
+            cout << *(numbersPTR+i) << ", ";
         }
-        cout << numbers[4] << " is " << Sum_numbers() << endl;
+        cout << *(numbersPTR+number_of_numbers - 1) << " is " << Sum_numbers() << endl;
+        delete [] numbersPTR;
     }
 };
 
 int main()
 {
-    Sum_5_numbers test;
-    test.Get_numbers();
-    test.output();
+    int num;
+    cout << "Enter how many numbers that you want to enter? : ";
+    cin >> num;
+    Sum_5_numbers test, *TestPTR;
+    TestPTR = &test;
+    test.Get_numbers(num);
+    TestPTR -> output();
     return 0;
 }
