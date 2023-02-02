@@ -7,9 +7,11 @@ class Sum_numbers
 private:
     int sum, *numbersPTR; // Declare sum of numbers valuable, and int pointer in order to use like array.
     int count_of_numbers; // Count of numbers value.
+    static int count; // It is good at counting how many object is.
 public:
     Sum_numbers(int value1) // Constructor for caculate and initialize valuable with member functions.
     {
+        count++; // count constructor
         sum = 0;
         Get_numbers(value1);
         Sum();
@@ -17,6 +19,7 @@ public:
     }
     Sum_numbers(const Sum_numbers &V1)
     {
+        count++; // count copy constructor
         numbersPTR = V1.numbersPTR;
         count_of_numbers = V1.count_of_numbers;
         sum = V1.sum;
@@ -24,6 +27,7 @@ public:
     ~Sum_numbers() // Destructor for deleting int pointer memory.
     {
         // delete [] numbersPTR;
+        cout << "The count of object is " << count << endl;
     }
     void Get_numbers(int num) // Input numbers and allocate memory.
     {
@@ -56,7 +60,7 @@ public:
         // If you write function has return in output(cout or function for output), function is executed whenever output
     }
 };
-
+int Sum_numbers::count = 0; // Static member valuable can initialize outside the class
 int main()
 {
     int num;
