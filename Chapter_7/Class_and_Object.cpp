@@ -12,11 +12,18 @@ public:
     {
         sum = 0;
         Get_numbers(value1);
+        Sum();
         output();
+    }
+    Sum_numbers(const Sum_numbers &V1)
+    {
+        numbersPTR = V1.numbersPTR;
+        count_of_numbers = V1.count_of_numbers;
+        sum = V1.sum;
     }
     ~Sum_numbers() // Destructor for deleting int pointer memory.
     {
-        delete [] numbersPTR;
+        // delete [] numbersPTR;
     }
     void Get_numbers(int num) // Input numbers and allocate memory.
     {
@@ -30,13 +37,13 @@ public:
             *(numbersPTR+i) = data;
         }
     }
-    int Sum()
+    void Sum()
     {
         for (int i = 0; i < count_of_numbers; i++) // Sum all numbers with loop statement.
         {
             sum += *(numbersPTR+i);
         }
-        return sum;  // Return int type for output() function.
+        //return sum;  // Return int type for output() function. [Ln 55]
     }
     void output() // Output all numbers and result.
     {
@@ -45,7 +52,8 @@ public:
         {
             cout << *(numbersPTR+i) << ", ";
         }
-        cout << *(numbersPTR+count_of_numbers - 1) << " is " << Sum() << endl;
+        cout << *(numbersPTR+count_of_numbers - 1) << " is " << sum << endl;
+        // If you write function has return in output(cout or function for output), function is executed whenever output
     }
 };
 
@@ -55,5 +63,7 @@ int main()
     cout << "Enter how many numbers that you want to enter? : "; // Input count of numbers
     cin >> num;
     Sum_numbers test(num); // Declare constructor.
+    Sum_numbers Copy_test(test);
+    Copy_test.output();
     return 0;
 }
