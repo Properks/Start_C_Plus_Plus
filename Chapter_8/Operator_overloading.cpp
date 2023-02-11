@@ -4,54 +4,43 @@ using namespace std;
 class Sum_another_object
 {
 private:
-    int x,y;
+    int *ArrPointer;
+    int count;
 public:
-    Sum_another_object(); // Declare constructor.
-    Sum_another_object(int value1, int value2); 
-    ~Sum_another_object() {}
-    int operator && (const Sum_another_object &A) // Check all member variables of the (this) and A have value.
-    {
-        return (this -> x && A.x) && (this -> y && A.y); // Return bool type. So return int(0 or 1)
-    }
-    int operator == (const Sum_another_object &A) // Check (this) is same as A.
-    {
-        return (this -> x == A.x) && (this -> y == A.y);
-    }
+    Sum_another_object(int value); // Declare constructor.
+    ~Sum_another_object();
     void operator ()() // () overloading instead of output member function for reaching private variable
     {
-        cout << "X is :" << x << endl << "Y is : " << y << endl;
+        for (int i = 0; i < count; i++)
+        {
+            cout << ArrPointer[i] << endl;
+        }
     }
-    void Plus(int value) // Sum member function for reaching private variable
+    int& operator [](int value) // Input value to array
     {
-        this -> x += value;
+        return ArrPointer[value];
     }
 };
 
-Sum_another_object::Sum_another_object() // initialize member variable
+Sum_another_object::Sum_another_object(int value) // initialize Array memory.
 {
-    x = 0;
-    y = 0;
+    count = value;
+    ArrPointer = new int [value];
 }
-
-Sum_another_object::Sum_another_object(int value1, int value2) 
+Sum_another_object::~Sum_another_object() //Deallocate ArrPointer memory.
 {
-    x = value1;
-    y = value2;
-
+    delete [] ArrPointer;
 }
 
 int main()
 {
-    Sum_another_object A1(1,3);
-    Sum_another_object A2(2,4);
-    Sum_another_object A3(3,0);
-
-    if (A1 && A2) {cout << "All member variables of the A1 and A2 have value."  << endl;}
-    else{cout << "Not at all member variables of the A1 and A2 have value."  << endl;}
-
-    if (A1 == A2){cout << "A1 is the same as A2" << endl;}
-    else{cout << "A1 and A2 are different" << endl;}
-    A1(); // () operator overloading for printing
-
+    int num;
+    Sum_another_object A1(10);
+    cout << "Enter 10 numbers : ";
+    for (int i = 0; i < 10; i++)
+    {
+        cin >> A1[i];
+    }
+    A1();
     return 0;
 }
