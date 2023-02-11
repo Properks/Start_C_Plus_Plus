@@ -11,15 +11,15 @@ public:
     ~Sum_another_object() {}
     int operator && (const Sum_another_object &A) // Check all member variables of the (this) and A have value.
     {
-        return (this -> x && A.x) && (this -> y && A.y);
+        return (this -> x && A.x) && (this -> y && A.y); // Return bool type. So return int(0 or 1)
     }
     int operator == (const Sum_another_object &A) // Check (this) is same as A.
     {
         return (this -> x == A.x) && (this -> y == A.y);
     }
-    void output() // output member function for reaching private variable
+    void operator ()() // () overloading instead of output member function for reaching private variable
     {
-        cout << x << endl;
+        cout << "X is :" << x << endl << "Y is : " << y << endl;
     }
     void Plus(int value) // Sum member function for reaching private variable
     {
@@ -51,6 +51,7 @@ int main()
 
     if (A1 == A2){cout << "A1 is the same as A2" << endl;}
     else{cout << "A1 and A2 are different" << endl;}
-    
+    A1(); // () operator overloading for printing
+
     return 0;
 }
