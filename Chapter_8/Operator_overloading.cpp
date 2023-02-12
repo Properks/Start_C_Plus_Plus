@@ -9,12 +9,14 @@ private:
 public:
     Sum_another_object(int value); // Declare constructor.
     ~Sum_another_object();
-    void operator ()() // () overloading instead of output member function for reaching private variable
+    friend ostream& operator <<(ostream &os, Sum_another_object &A)
     {
-        for (int i = 0; i < count; i++)
+        os << A.ArrPointer[0];
+        for (int i = 1; i < A.count; i++)
         {
-            cout << ArrPointer[i] << endl;
+            os << ", " << A.ArrPointer[i];
         }
+        return os;
     }
     int& operator [](int value) // Input value to array
     {
@@ -41,6 +43,6 @@ int main()
     {
         cin >> A1[i];
     }
-    A1();
+    cout << A1 << endl;
     return 0;
 }
