@@ -9,7 +9,7 @@ private:
 public:
     Sum_another_object(int value); // Declare constructor.
     ~Sum_another_object();
-    friend ostream& operator <<(ostream &os, Sum_another_object &A)
+    friend ostream& operator <<(ostream &os, Sum_another_object &A) // << operator overloading by using ostream
     {
         os << A.ArrPointer[0];
         for (int i = 1; i < A.count; i++)
@@ -18,9 +18,13 @@ public:
         }
         return os;
     }
-    int& operator [](int value) // Input value to array
+    friend istream& operator >>(istream &is, Sum_another_object &A) // >> operator overloading by using istream
     {
-        return ArrPointer[value];
+        for (int i = 0; i < A.count; i++)
+        {
+            is >> A.ArrPointer[i];
+        }
+        return is;
     }
 };
 
@@ -39,10 +43,7 @@ int main()
     int num;
     Sum_another_object A1(10);
     cout << "Enter 10 numbers : ";
-    for (int i = 0; i < 10; i++)
-    {
-        cin >> A1[i];
-    }
+    cin >>  A1;
     cout << A1 << endl;
     return 0;
 }
