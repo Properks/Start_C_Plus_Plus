@@ -26,6 +26,15 @@ public:
         }
         return is;
     }
+    void* operator new (size_t size)
+    {
+        void* MkMemory = new char[size];
+        return MkMemory;
+    }
+    void operator delete (void* Delmemory)
+    {
+        free (Delmemory);
+    }
 };
 
 Sum_another_object::Sum_another_object(int value) // initialize Array memory.
@@ -41,9 +50,12 @@ Sum_another_object::~Sum_another_object() //Deallocate ArrPointer memory.
 int main()
 {
     int num;
-    Sum_another_object A1(10);
+    Sum_another_object *ptr = new Sum_another_object(10);
     cout << "Enter 10 numbers : ";
-    cin >>  A1;
-    cout << A1 << endl;
+    cin >> *ptr;
+    cout << *ptr << endl;
+    cout << ptr << endl;
+    delete ptr;
+    cout << ptr << endl;
     return 0;
 }
