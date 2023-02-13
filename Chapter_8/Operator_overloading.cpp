@@ -1,61 +1,59 @@
 #include<iostream>
+#include<string>
 using namespace std;
 
-class Sum_another_object
+class Sum_String
 {
 private:
-    int *ArrPointer;
-    int count;
+    char *StrArr;
+    int len;
 public:
-    Sum_another_object(int value); // Declare constructor.
-    ~Sum_another_object();
-    friend ostream& operator <<(ostream &os, Sum_another_object &A) // << operator overloading by using ostream
+    Sum_String(); // For operator +
+    Sum_String(const char *str); // initialize string
+    ~Sum_String();
+    Sum_String operator +(const Sum_String &A) // Combine two strings
     {
-        os << A.ArrPointer[0];
-        for (int i = 1; i < A.count; i++)
-        {
-            os << ", " << A.ArrPointer[i];
-        }
+        Sum_String Added;
+        Added.len = strlen(this -> StrArr) + strlen(A.StrArr);
+        Added.StrArr = new char [Added.len + 1];
+        strcpy(Added.StrArr, this -> StrArr); // copy Added.StrArr
+        strcat(Added.StrArr, A.StrArr); // Added A.StrArr
+        return Added;
+    }
+    friend ostream& operator << (ostream &os, Sum_String &object) // print string
+    {
+        os << object.StrArr;
         return os;
     }
-    friend istream& operator >>(istream &is, Sum_another_object &A) // >> operator overloading by using istream
-    {
-        for (int i = 0; i < A.count; i++)
-        {
-            is >> A.ArrPointer[i];
-        }
-        return is;
-    }
-    void* operator new (size_t size)
-    {
-        void* MkMemory = new char[size];
-        return MkMemory;
-    }
-    void operator delete (void* Delmemory)
-    {
-        free (Delmemory);
-    }
 };
-
-Sum_another_object::Sum_another_object(int value) // initialize Array memory.
+Sum_String::Sum_String()
 {
-    count = value;
-    ArrPointer = new int [value];
+    StrArr = NULL;
+    len = 0;
 }
-Sum_another_object::~Sum_another_object() //Deallocate ArrPointer memory.
+Sum_String::Sum_String(const char *str)
 {
-    delete [] ArrPointer;
+    len = strlen(str);
+    StrArr = new char [len + 1];
+    strcpy(StrArr, str);
 }
-
+Sum_String::~Sum_String()
+{
+    delete [] StrArr;
+}
 int main()
 {
-    int num;
-    Sum_another_object *ptr = new Sum_another_object(10);
-    cout << "Enter 10 numbers : ";
-    cin >> *ptr;
-    cout << *ptr << endl;
-    cout << ptr << endl;
-    delete ptr;
-    cout << ptr << endl;
+    char STRARR[100];
+
+    cout << "Enter first string : "; // Input first string and save in First_string object
+    cin.getline(STRARR, 100);
+    Sum_String First_string(STRARR);
+
+    cout << "Enter second string : "; // Input second string and save in Second_string object
+    cin.getline(STRARR, 100);
+    Sum_String Second_string(STRARR);
+
+    Sum_String Third_string = First_string + Second_string; // Using '+' operator overloading
+    cout << Third_string << endl;
     return 0;
 }
