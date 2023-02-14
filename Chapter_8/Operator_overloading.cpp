@@ -26,6 +26,16 @@ public:
         os << object.StrArr;
         return os;
     }
+    // Added operator `new` and `delete`
+    void* operator new (size_t size)
+    {
+        void* MkMemory = ::operator new(size);
+        return MkMemory;
+    }
+    void operator delete (void* Delmemory)
+    {
+        ::operator delete (Delmemory);
+    }
 };
 
 Sum_String::Sum_String() // Initialize memeber variable.
