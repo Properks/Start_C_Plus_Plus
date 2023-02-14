@@ -8,11 +8,11 @@ private:
     char *StrArr;
     int len;
 public:
-    Sum_String(); // Constructor
+    Sum_String(); // Constructor.
     ~Sum_String();
-    Sum_String operator +(const Sum_String &A); // Combine two strings '+'
-    Sum_String& operator +=(const Sum_String &A); // Combine two strings '+='
-    friend istream& operator >> (istream &is, Sum_String &object) // Input string
+    Sum_String operator +(const Sum_String &A); // Combine two strings '+'.
+    Sum_String& operator +=(const Sum_String &A); // Combine two strings '+='.
+    friend istream& operator >> (istream &is, Sum_String &object) // Input string.
     {
         char temp[512];
         is.getline(temp, 512);
@@ -21,37 +21,37 @@ public:
         strcpy(object.StrArr, temp);
         return is;
     }
-    friend ostream& operator << (ostream &os, Sum_String &object) // print string
+    friend ostream& operator << (ostream &os, Sum_String &object) // print string.
     {
         os << object.StrArr;
         return os;
     }
 };
 
-Sum_String::Sum_String()
+Sum_String::Sum_String() // Initialize memeber variable.
 {
     StrArr = NULL;
     len = 0;
 }
-Sum_String::~Sum_String()
+Sum_String::~Sum_String() // Deallocate memory.
 {
     delete [] StrArr;
 }
-Sum_String Sum_String::operator +(const Sum_String &A) // Combine two strings '+'
+Sum_String Sum_String::operator +(const Sum_String &A) // Add two strings and save other object.
 {
     Sum_String Added;
     Added.len = strlen(this -> StrArr) + strlen(A.StrArr);
     Added.StrArr = new char [Added.len + 1];
-    strcpy(Added.StrArr, this -> StrArr); // copy Added.StrArr
-    strcat(Added.StrArr, A.StrArr); // Added A.StrArr
+    strcpy(Added.StrArr, this -> StrArr); // copy Added.StrArr.
+    strcat(Added.StrArr, A.StrArr); // Added A.StrArr.
     return Added;
 }
-Sum_String& Sum_String::operator +=(const Sum_String &A)
+Sum_String& Sum_String::operator +=(const Sum_String &A) // Combine two strings '+='
 {
-    char temp[512];
+    char temp[512]; // For save 'this -> object.StrArr' to temp. because of [Ln 54].
     strcpy(temp, this -> StrArr);
     this -> len += A.len;
-    this -> StrArr = new char [this -> len + 1];
+    this -> StrArr = new char [this -> len + 1]; // Reallocate memory for combining.
     strcpy(this -> StrArr, temp);
     strcat(this -> StrArr, A.StrArr);
     return *this;
