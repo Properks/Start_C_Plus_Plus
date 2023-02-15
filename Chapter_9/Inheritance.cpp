@@ -5,15 +5,14 @@ class base
 private:
     int value1, value2;
 public:
-    void set_value(int i, int j);
     int Sum_two_values();
+    friend istream& operator >> (istream &is, base &ob)
+    {
+        is >> ob.value1 >> ob.value2;
+        return is;
+    }
 };
 
-void base::set_value(int i, int j)
-{
-    value1 = i;
-    value2 = j;
-}
 int base::Sum_two_values()
 {
     return value1 + value2;
@@ -38,8 +37,7 @@ int main()
     Derived ob(3);
 
     cout << "Enter two numbers : ";
-    cin >> num1 >> num2;
-    ob.set_value(num1, num2);
+    cin >> ob;
     cout << ob.Multiply() << endl;
     return 0;
 }
