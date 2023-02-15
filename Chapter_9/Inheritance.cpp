@@ -18,7 +18,7 @@ int base::Sum_two_values()
     return value1 + value2;
 }
 
-class Derived : public base
+class Derived : private base
 {
 private:
     int k;
@@ -29,6 +29,10 @@ public:
     {
         return Sum_two_values() * k;
     }
+    void input()
+    {
+        cin >> *this;
+    }
 };
 
 int main()
@@ -37,7 +41,7 @@ int main()
     Derived ob(3);
 
     cout << "Enter two numbers : ";
-    cin >> ob;
+    ob.input();
     cout << ob.Multiply() << endl;
     return 0;
 }
