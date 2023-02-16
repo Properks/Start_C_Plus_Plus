@@ -88,7 +88,7 @@ void print(Mage A, Warrior B) // For interface
 {
     cout << endl << "Warrior" << endl;
     cout << "Health" << B.Current_Health_point << "/" << 100 << endl;
-    cout << "Mana" << B.Current_Mana_point << "/" << 20 << endl;
+    cout << "Mana" << B.Current_Mana_point << "/" << 20 << endl << endl;
     cout << "Mage" << endl;
     cout << "Health" << A.Current_Health_point << "/" << 70 << endl;
     cout << "Mana" << A.Current_Mana_point << "/" << 50 << endl << endl;
@@ -96,6 +96,39 @@ void print(Mage A, Warrior B) // For interface
 
 int main()
 {
-    
+    int choose;
+    Warrior Wr;
+    Mage Mg;
+
+    cout << "You are Warrior" << endl << "A.I is Mage" << endl;
+    print(Mg, Wr);
+    while (Wr.Current_Health_point > 0 && Mg.Current_Health_point > 0) // Fight simulator
+    {
+        cout << "Which one would you choose? (1 = Normal attack, 2 = Special attack) : ";
+        cin >> choose;
+        if(choose == 1)
+        {
+            Wr.Weapon_str(Mg);
+        }
+        if(choose == 2)            
+        {
+            Wr.Special_atk(Mg);
+        }
+        if(choose != 1 && choose != 2)
+        {
+            cout << "Your charater is only standing";
+        }
+        if(Mg.Current_Health_point < 0){break;}
+        Mg.Spell_pw(Wr);
+        print(Mg, Wr);
+    }
+    if(Mg.Current_Health_point < 0) // show who is won.
+    {
+        cout << "You won!!!" << endl;
+    }
+    else
+    {
+        cout << "You lose..." << endl;
+    }
     return 0;
 }
