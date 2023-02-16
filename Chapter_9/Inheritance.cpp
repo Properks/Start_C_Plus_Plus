@@ -4,7 +4,7 @@ using namespace std;
 // Design a class hierarchy for the characters in the game
 class Charater // Including Health, mana point and defense(ex. resistance) 
 {
-private:
+protected:
     int Max_Health_point;
     int Max_Mana_point;
 public:
