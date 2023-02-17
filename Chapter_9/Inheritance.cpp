@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 // Design a class hierarchy for the characters in the game
-class Charater // Including Health, mana point and defense(ex. resistance) 
+class Character // Including Health, mana point and defense(ex. resistance) 
 {
 protected:
     int Max_Health_point;
@@ -13,7 +13,7 @@ public:
     int Magic_resistance;
     void Set_point(int health, int man);
 }; 
-void Charater::Set_point(int health, int mana) 
+void Character::Set_point(int health, int mana) 
 {
     Max_Health_point = health;
     Max_Mana_point = mana;
@@ -21,21 +21,22 @@ void Charater::Set_point(int health, int mana)
     Current_Mana_point = Max_Mana_point;
 }
 
-class Warrior : public Charater // Warrior character including normal attack power and special attack
+class Warrior // Warrior character including normal attack power and special attack using nested class
 {
 private:
     int Weapon_strength;
     int Special_attacks;
 public:
+    Character point;
     Warrior();
     ~Warrior() {}
-    void Weapon_str(Charater &A) // Normal attack
+    void Weapon_str(Character &A) // Normal attack
     {
         A.Current_Health_point -= Weapon_strength;
     }
-    void Special_atk(Charater &A) // Special attack
+    void Special_atk(Character &A) // Special attack
     {
-        if (this -> Current_Mana_point < 2)
+        if (this -> point.Current_Mana_point < 2)
         {
             cout << "Cannot attack because of no mana" << endl;
             return;
@@ -43,27 +44,27 @@ public:
         else
         {
             A.Current_Health_point -= (Weapon_strength * Special_attacks - A.Magic_resistance); // Calculate resistance
-            this -> Current_Mana_point -=  Special_attacks; // reduce mana
+            this -> point.Current_Mana_point -=  Special_attacks; // reduce mana
         }
     }
 };
 
 Warrior::Warrior() // Initialize stats of warrior
 {
-    Set_point(100, 20);
+    point.Set_point(100, 20);
     Weapon_strength = 8;
     Special_attacks = 2;
-    Magic_resistance = 0;
+    point.Magic_resistance = 0;
 }
 
-class Mage : public Charater
+class Mage : public Character // mage class derived by character class
 {
 private:
     int Spell_power;
 public:
     Mage();
     ~Mage() {}
-    void Spell_pw(Charater &A) // Spell attack
+    void Spell_pw(Character &A) // Spell attack
     {
         if (this -> Current_Mana_point < 3)
         {
@@ -87,8 +88,8 @@ Mage::Mage() // initialize stats of mage
 void print(Mage A, Warrior B) // For interface
 {
     cout << endl << "Warrior" << endl;
-    cout << "Health" << B.Current_Health_point << "/" << 100 << endl;
-    cout << "Mana" << B.Current_Mana_point << "/" << 20 << endl << endl;
+    cout << "Health" << B.point.Current_Health_point << "/" << 100 << endl;
+    cout << "Mana" << B.point.Current_Mana_point << "/" << 20 << endl << endl;
     cout << "Mage" << endl;
     cout << "Health" << A.Current_Health_point << "/" << 70 << endl;
     cout << "Mana" << A.Current_Mana_point << "/" << 50 << endl << endl;
@@ -102,7 +103,7 @@ int main()
 
     cout << "You are Warrior" << endl << "A.I is Mage" << endl;
     print(Mg, Wr);
-    while (Wr.Current_Health_point > 0 && Mg.Current_Health_point > 0) // Fight simulator
+    while (Wr.point.Current_Health_point > 0 && Mg.Current_Health_point > 0) // Fight simulator
     {
         cout << "Which one would you choose? (1 = Normal attack, 2 = Special attack) : ";
         cin >> choose;
@@ -116,10 +117,10 @@ int main()
         }
         if(choose != 1 && choose != 2)
         {
-            cout << "Your charater is only standing";
+            cout << "Your character is only standing";
         }
         if(Mg.Current_Health_point < 0){break;}
-        Mg.Spell_pw(Wr);
+        Mg.Spell_pw(Wr.point);
         print(Mg, Wr);
     }
     if(Mg.Current_Health_point < 0) // show who is won.
