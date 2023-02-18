@@ -1,48 +1,38 @@
 #include <iostream>
 using namespace std;
-
-class Base // abstract function for pure virtual function.
+class Base
 {
 public:
-    virtual void Print() = 0; // declare virtual function
+    Base()
+    {
+        cout << "Constructing Base" << endl;
+    }
+    // ~Base() // Will hwve memory leak. Because of not working Derived destructor
+    // {
+    //     cout << "Destructing Base" << endl;
+    // }
+    virtual ~Base() // You must use virtual destructor. If you don't, Will have memory leak.(because of not work Derived destructor)
+    {
+        cout << "Destructing Base" << endl;
+    }
 };
 
 class Derived : public Base
 {
-private:
-    int x;
 public:
-    Derived(int A) : x(A) {} // = Derived(int A) {x = A;}
-    ~Derived() {}
-    void Print() // virtual function in derived class
+    Derived()
     {
-        cout << "You print Derived " << x << endl;
+        cout << "Constructing Derived" << endl;
     }
-};
-
-class Child : public Base
-{
-private:
-    int x;
-public:
-    Child(int A) : x(A) {} // = Derived(int A) {x = A;}
-    ~Child() {}
-    void Print() // Differ argument from base virtual
+    ~Derived()
     {
-        cout << "You print Child " << x << endl;
+        cout << "Destructing Derived" << endl;
     }
 };
 
 int main()
 {
-    Base *Bs1, *Bs2;
-    Derived Dr1(3);
-    Child Ch1(5);
-    Bs1 = &Dr1;
-    Bs2 = &Ch1;
-
-    Bs1->Print(); // with Derived class
-    Bs2->Print();
-
+    Base* b = new Derived();
+    delete b;
     return 0;
 }
