@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Base
+class Base // abstract function for pure virtual function.
 {
 public:
     virtual void Print() = 0; // declare virtual function
@@ -12,7 +12,7 @@ class Derived : public Base
 private:
     int x;
 public:
-    Derived(int A) : x(A) {}
+    Derived(int A) : x(A) {} // = Derived(int A) {x = A;}
     ~Derived() {}
     void Print() // virtual function in derived class
     {
@@ -25,7 +25,7 @@ class Child : public Base
 private:
     int x;
 public:
-    Child(int A) : x(A) {}
+    Child(int A) : x(A) {} // = Derived(int A) {x = A;}
     ~Child() {}
     void Print() // Differ argument from base virtual
     {
