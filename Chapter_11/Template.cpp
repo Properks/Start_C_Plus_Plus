@@ -1,26 +1,33 @@
 #include <iostream>
 using namespace std;
-template <class T> void Swap(T &n, T &m) // Template swap Two numbers
+template <class T> T Calculator(T n, T m, char C) // Template in order to calculate numbers
 {
-    T temp = n;
-    n = m;
-    m = temp;
-}
+    switch (C)
+    {
+    case '*':
+        return n*m;
+    case '/':
+        return n/m;
+    case '+':
+        return n+m;
+    case '-':
+        return n-m;
+    }
+    assert(false); // If it have error, print error
+} //FIXME: Input template form. I don't know User input which form.
 
 int main()
 {
+    char form;
     int A, B;
     double D1, D2;
-    cout << "Enter Two numbers(int) : ";
-    cin >> A >> B;
+    cout << "Enter a form will calculate(int) -> "; // Input two numbers and operator
+    cin >> A >> form >> B;
+    cout << "= " << Calculator(A,B,form) << endl;
 
-    Swap(A,B); // Swap two int form numbers with tamplate
-    cout << A << ", " << B << endl;
-
-    cout << "Enter Two numbers(double) : ";
-    cin >> D1 >> D2;
-    Swap(D1,D2); // Swap two double form numbers with template
-    cout << D1 << ", " << D2 << endl;
+    cout << "Enter a form will calculate(double) -> "; // Input two numbers and operator
+    cin >> D1 >> form >> D2;
+    cout << "= " << Calculator(D1,D2,form) << endl;
 
     return 0;
 }
