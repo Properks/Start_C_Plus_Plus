@@ -1,48 +1,52 @@
 #include <iostream>
 using namespace std;
-template <class T> T Calculator(T n, T m, char C) // Template in order to calculate numbers
+template <typename Tp> class Sum
 {
-    switch (C)
+private:
+    Tp value1, value2, sum;
+    char Operator;
+public:
+    Sum()
     {
-    case '*':
-        return n*m;
-    case '/':
-        return n/m;
-    case '+':
-        return n+m;
-    case '-':
-        return n-m;
+        value1 = 0; value2 = 0;
     }
-    assert(false); // If it have error, print error
-} //FIXME: Input template form. I don't know User input which form.
-template <class Type> Type sum(Type n, Type m)
-{
-    return (n+m);
-}
-template <class Type> Type sum(Type *Array, int A)
-{
-    Type total = 0;
-    for (int i = 0; i < A; i++)
+    friend istream& operator >>(istream &is, Sum &Input)
     {
-        total += *(Array + i);
+        is >> Input.value1 >> Input.Operator >> Input.value2;
+        return is;
     }
-    return total;
-}
+    friend ostream& operator <<(ostream &os, Sum &Output)
+    {
+        os << Output.value1 << " " << Output.Operator << " " << Output.value2 << " = " << Output.sum;
+        return os;
+    }
+    void Calculator()
+    {
+        switch (Operator)
+        {
+        case '*':
+            sum = value1*value2;
+            break;
+        case '/':
+            sum = value1/value2;
+            break;
+        case '+':
+            sum = value1+value2;
+            break;
+        case '-':
+            sum = value1-value2;
+            break;
+        }
+    }
+    
+};
 
 int main()
 {
-    int A, B;
-    int arr[10];
-    cout << "Enter two numbers -> "; // Input two numbers
-    cin >> A >> B;
-    cout << "= " << sum(A,B) << endl;
-
-    cout << "Enter two numbers -> "; // Input 10 numbers
-    for (int i = 0; i < 10; i++)
-    {
-        cin >> arr[i];
-    }
-    cout << "= " << sum(arr,10) << endl;
-
+    Sum <double> DB;
+    cout << "Enter a form will calculate -> "; // Input two numbers
+    cin >> DB;
+    DB.Calculator();
+    cout << DB << endl;
     return 0;
 }
