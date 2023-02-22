@@ -3,23 +3,19 @@ using namespace std;
 
 int main() // Enter specific input to escape.
 {
-    int value;
-    while (true)
+    char *strptr;
+    strptr = new char [100];
+    cout << "Enter a string : "; //If I enter Amy,John,Jenny,Nick
+    for (int i = 0; i < 2; i++)
     {
-        cout << "Enter a number to escape : ";
-        cin >> value;
-        if (cin.fail() == 1) // If you don't enter number, this will work.
-        {
-            cin.clear(); // clear error flag and allow the program to continue reading input from `cin`.
-            cin.ignore(100, '\n'); // prevent any remaining characters in the input buffer from causing further input issues.
-
-            cout << "This isn't a number" << endl;
-        }
-        else
-        {
-            cout << "This is a number" << endl;
-            break; // escape from while statement.
-        }
+        cin.getline(strptr, 100, ','); // cin.getline will enter `Amy` to strptr and cursor behind ',' 
+        cout << strptr << endl;
     }
+    for (int j = 0; j < 2; j++)
+    {
+        cin.get(strptr, 100, ','); // cin.getline will enter `Amy` to strptr and cursor on ',' 
+        cout << strptr << endl; // So, Nick didn't enter to strptr.
+    }
+    delete [] strptr;
     return 0;
 }
