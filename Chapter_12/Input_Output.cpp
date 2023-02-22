@@ -3,19 +3,19 @@ using namespace std;
 
 int main() // Enter specific input to escape.
 {
-    char *strptr;
-    strptr = new char [100];
-    cout << "Enter a string : "; //If I enter Amy,John,Jenny,Nick
-    for (int i = 0; i < 2; i++)
-    {
-        cin.getline(strptr, 100, ','); // cin.getline will enter `Amy` to strptr and cursor behind ',' 
-        cout << strptr << endl;
-    }
-    for (int j = 0; j < 2; j++)
-    {
-        cin.get(strptr, 100, ','); // cin.getline will enter `Amy` to strptr and cursor on ',' 
-        cout << strptr << endl; // So, Nick didn't enter to strptr.
-    }
-    delete [] strptr;
+    char *PTRstr;
+    char ch;
+    PTRstr = new char [100];
+    // `cin >> ch;` ignore 'space', but `ch = cin.get();` doesn't ignore 'space'
+    cout << "Enter string with space : "; // Suppose to enter "Nick, Amy"
+    cin.getline(PTRstr, 100, ','); // 'PTRstr' is 'Nick' and cursor behind ','.
+
+    cin >> ch; // If I use `ch = cin.get();` first, 'ch' will be ' '(space).
+    cout << "cin >> ch : " << ch << endl; // output is A (because `cin >> ch` ignore 'space').
+
+    ch = cin.get(); // If I use `ch = cin.get();` first, 'ch' will be 'A'.
+    cout << "cin.get() : " << ch << endl; // Output is 'm'.
+
+    delete [] PTRstr;
     return 0;
 }
