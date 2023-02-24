@@ -4,11 +4,15 @@ using namespace std;
 
 int main() // Enter specific input to escape.
 {
-    ofstream Output;
-    Output.open("File_Input_Output.txt"); // == ofstream Output("File_Input_Output.txt");
+    char ch, Sentence[80], Word[10];
+    ifstream Input;
+    Input.open("File_Input_Output.txt"); // == ifstream Input("File_Input_Output.txt");
 
-    Output << "Enjoy your coding";
-    cout << "Make a file!!" << endl;
-    Output.close();
+    Input.getline(Sentence, 80, '\n'); // A sentence
+    Input >> Word; // A word
+    Input >> ch; // A alphabet
+    cout << Sentence << ", "<< endl
+     << Word << ", " << ch << endl;
+    Input.close();
     return 0;
 }
