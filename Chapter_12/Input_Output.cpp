@@ -24,7 +24,25 @@ int main() // Record list and price that user will buy in file and output
     double Price;
     char *list, ch_for_print;
     list = new char[100]; // Allocate heap memory.
-    fstream List("File_Input_Output.txt", ios::trunc | ios::out); // Open file, reset contents and output mode.
+
+    fstream List;
+    Is_it_int("Which do you rewrite this file or add list? (1 : Rewrite, 2 : Add): ", Count);
+    if(Count == 1)
+    {
+        List.open("File_Input_Output.txt", ios::trunc | ios::out); // Open file, reset contents and output mode.
+    }
+    else
+    {
+        if(Count == 2)
+        {
+            List.open("File_Input_Output.txt", ios::app | ios::out); // Open file, add contents and output mode.
+        }
+        else
+        {
+            cout << "You enter " << Count << "!! (non 1 or 2) Exit program" << endl;
+            return 0;
+        }
+    }
 
     Is_it_int("Enter how many did you buy : ", Count);
     if (Count < 1)
@@ -46,7 +64,7 @@ int main() // Record list and price that user will buy in file and output
     }
     List.close(); // Close file.
     List.open("File_Input_Output.txt", ios::in); // input mode.
-    while (List.get(ch_for_print))
+    while (List.get(ch_for_print)) // Print list
         cout << ch_for_print;
     List.close();
     delete [] list; // Unallocate heap memory.
