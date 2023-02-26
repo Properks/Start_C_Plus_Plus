@@ -22,7 +22,7 @@ int main() // Record list and price that user will buy in file and output
 {
     int Count;
     double Price;
-    char *list;
+    char *list, ch_for_print;
     list = new char[100]; // Allocate heap memory.
     fstream List("File_Input_Output.txt", ios::trunc | ios::out); // Open file, reset contents and output mode.
 
@@ -46,11 +46,8 @@ int main() // Record list and price that user will buy in file and output
     }
     List.close(); // Close file.
     List.open("File_Input_Output.txt", ios::in); // input mode.
-    for (int j = 0; j < Count; j++) // Output list.
-    {
-        List.getline(list, 100, '\n');
-        cout << list << endl;
-    }
+    while (List.get(ch_for_print))
+        cout << ch_for_print;
     List.close();
     delete [] list; // Unallocate heap memory.
     return 0;
