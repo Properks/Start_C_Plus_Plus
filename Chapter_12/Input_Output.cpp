@@ -22,11 +22,11 @@ int main() // Record list and price that user will buy in file and output
 {
     int Count;
     double Price;
-    char *list, ch_for_print;
-    list = new char[100]; // Allocate heap memory.
+    char ch_for_print;
+    string list; // Change from 'char *list;'.because this don't need to dynamic memory
 
     fstream List;
-    Is_it_int("Which do you rewrite this file or add list? (1 : Rewrite, 2 : Add): ", Count);
+    Is_it_int("Which do you rewrite this file or add list? (1 : Rewrite, 2 : Add): ", Count); // choose mode
     if(Count == 1)
     {
         List.open("File_Input_Output.txt", ios::trunc | ios::out); // Open file, reset contents and output mode.
@@ -35,12 +35,15 @@ int main() // Record list and price that user will buy in file and output
     {
         if(Count == 2)
         {
+            List.open("File_Input_Output.txt", ios::in);
+            while(List.get(ch_for_print)){cout << ch_for_print;} // print current list
+            List.close(); // if this use under ios::app, cursor is at the bottom. So, error
             List.open("File_Input_Output.txt", ios::app | ios::out); // Open file, add contents and output mode.
         }
         else
         {
             cout << "You enter " << Count << "!! (non 1 or 2) Exit program" << endl;
-            return 0;
+            return 0; // Exit program.
         }
     }
 
@@ -48,6 +51,7 @@ int main() // Record list and price that user will buy in file and output
     if (Count < 1)
     {
         cout << "You will not buy anything, Have a nice day" << endl;
+        return 0;
     }
     else
     {
@@ -56,7 +60,7 @@ int main() // Record list and price that user will buy in file and output
             cout << "Enter a name : ";
             cin >> list;
             List << list;
-            List.width(15 - strlen(list)); // In order to keep in line.
+            List.width(15 - list.length()); // In order to keep in line.
             Is_it_int("Enter a price : ", Price);
             List << "$" << Price << endl;
         }
@@ -67,6 +71,5 @@ int main() // Record list and price that user will buy in file and output
     while (List.get(ch_for_print)) // Print list
         cout << ch_for_print;
     List.close();
-    delete [] list; // Unallocate heap memory.
     return 0;
 }
