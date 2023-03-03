@@ -1,42 +1,33 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <iomanip>
+#include <list> // more ccomfortable to move, insert and delete value than vector
 using namespace std;
-int Plus(int a, int b)
-{    
-    return a + b;
-}
 
-void Input(vector<int> &Arr)
+void print(list<string> Arr, list<string>::iterator it)
 {
-    cout << "Enter 5 numbers : ";
-    for (int i = 0; i < 5; i++)
+    int i = 1;
+    cout << "Inputed data : " << endl;
+    for (it = Arr.begin(); it != Arr.end(); it++)
     {
-        cin >> Arr[i];
-    }
-}
-
-void print(vector<int> &Arr)
-{
-    for (int i = 0; i < 5; i++)
-    {
-        cout << Arr[i] << " ";
+        cout <<"\"" << i << "\" : " << *it << endl;
+        i++;
     }
     cout << endl;
 }
 
 int main()
 {
-    vector<int> Arr1(5), Arr2(5), Arr3(5);
-    Input(Arr1);
-    Input(Arr2);
-    
-    transform(Arr1.begin(), Arr1.end(), Arr2.begin(), Arr3.begin(), Plus);
-    
-    print(Arr1);
-    print(Arr2);
-    print(Arr3);
-    
+    list<string> Student;
+    list<string>::iterator it;
+    string ch;
+    int select;
+
+    cout << "Enter students' name (exit : !): ";
+    while (cin >> ch)
+    {
+        if (ch == "!"){break;}
+        Student.push_back(ch);
+    }
+    print(Student, it);
+
     return 0;
 }
