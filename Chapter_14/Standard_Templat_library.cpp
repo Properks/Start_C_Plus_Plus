@@ -1,36 +1,42 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <functional>
+#include <iomanip>
 using namespace std;
+int Plus(int a, int b)
+{    
+    return a + b;
+}
 
-int main()
+void Input(vector<int> &Arr)
 {
-    vector<int> Arr(10);
-    cout << "Enter 10 numbers : ";
-    for (int i = 0; i < 10; i++)
+    cout << "Enter 5 numbers : ";
+    for (int i = 0; i < 5; i++)
     {
         cin >> Arr[i];
     }
-    sort(Arr.begin(), Arr.begin() + 10, greater<int>());
-    
-    for (int j = 0; j < 10; j++)
+}
+
+void print(vector<int> &Arr)
+{
+    for (int i = 0; i < 5; i++)
     {
-        cout << Arr[j];
+        cout << Arr[i] << " ";
     }
     cout << endl;
+}
+
+int main()
+{
+    vector<int> Arr1(5), Arr2(5), Arr3(5);
+    Input(Arr1);
+    Input(Arr2);
+    
+    transform(Arr1.begin(), Arr1.end(), Arr2.begin(), Arr3.begin(), Plus);
+    
+    print(Arr1);
+    print(Arr2);
+    print(Arr3);
     
     return 0;
 }
-/*
-// About declaring vector
-// Declare a vector of integers with no initial values
-vector<int> myInts;
-
-// Declare a vector of strings with initial values
-vector<string> myStrings = {"apple", "banana", "orange"};
-
-// Declare a vector of characters with initial values specified using iterators
-char letters[] = {'a', 'b', 'c', 'd', 'e'};
-vector<char> myChars(letters, letters+5);
-*/
