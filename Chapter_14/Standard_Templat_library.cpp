@@ -2,13 +2,23 @@
 #include <map> // set key and value.
 using namespace std;
 
-void print(map <string, int> m, map <string, int>::iterator it)
+void print(map <string, int> m, map <string, int>::iterator it) // print map list
 {
     for (it = m.begin(); it != m.end(); it++)
     {
         cout << it->first << endl;
     }
 }
+
+void find(map <string, int> m, string &str) // find same name and change name + count form
+{
+    int count = 2;
+    string str1 = str;
+    while (m.find(str) != m.end())
+    {
+        str = str1 + to_string(count++);
+    }
+} // because map container doesn't have same key. So, make different.
 
 int main()
 {
@@ -20,10 +30,11 @@ int main()
     cout << "How many student did you enter? : ";
     cin >> count;
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) // Input name and Student ID.
     {
         cout << "Enter a name : ";
         cin >> name;
+        find(Student_ID, name);
         cout << "Enter a " << name << "'s ID : ";
         cin >> ID;
         Student_ID[name] = ID;
@@ -31,8 +42,8 @@ int main()
     cout << endl;
     print(Student_ID, it);
 
-    while(true)
-    {
+    while(true) // search student ID
+    { // TODO: add a system insert and erase.
         cout << "Enter a name of person that you want to know Student-ID (exit : Enter a '!'): ";
         cin >> name;
         if (name == "!")
@@ -63,7 +74,5 @@ int main()
             
         }
     }
-    
-    
     return 0;
 }
