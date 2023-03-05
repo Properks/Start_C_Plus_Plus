@@ -1,108 +1,69 @@
 #include <iostream>
-#include <list> // more ccomfortable to move, insert and delete value than vector
+#include <map> // set key and value.
 using namespace std;
-template<class T>void Is_it_number(string str, T &num) // T : int or double
-{
-    while(true)
-    {
-        cout << str;
-        cin >> num;
-        if(cin.fail() == 1)
-        {
-            cin.clear();
-            cin.ignore(100, '\n');
 
-            cout << " This isn't number ";
-        }
-        else
-        {
-            break;
-        }
-    }
-}
-
-void print(list<string> Arr, list<string>::iterator it)
+void print(map <string, int> m, map <string, int>::iterator it)
 {
-    int i = 1;
-    cout << "Inputed data : " << endl;
-    for (it = Arr.begin(); it != Arr.end(); it++) // Print with iterator in list
+    for (it = m.begin(); it != m.end(); it++)
     {
-        cout <<"\"" << i << "\" : " << *it << endl;
-        i++;
+        cout << it->first << endl;
     }
-    cout << endl;
-}
-
-void Del_value(list<string> &Arr, list<string>::iterator it) // Add '&' in front of Arr Because Student must be changed
-{
-    int num;
-    Is_it_number("What did you want delete? Enter a number : ", num);
-    it = Arr.begin();
-    for (int i = 0; i < num - 1; i++) // For location
-    {
-        it++;
-    }
-    Arr.erase(it);
-}
-
-void Insert_value(list<string> &Arr, list<string>::iterator it) // Add '&' in front of Arr Because Student must be changed
-{
-    int Location;
-    string ch;
-    Is_it_number("Where did you want to Insert? Enter a number : ", Location);
-    it = Arr.begin();
-    for (int i = 0; i < Location - 1; i++)
-    {
-        it++;
-    }
-    cout << "Enter a string : ";
-    cin >> ch;
-    Arr.insert(it, ch);
 }
 
 int main()
 {
-    list<string> Student;
-    list<string>::iterator it;
-    string ch;
-    int select;
+    int count, ID;
+    string name;
+    map <string, int> Student_ID;
+    map <string, int>::iterator it;
+    
+    cout << "How many student did you enter? : ";
+    cin >> count;
 
-    cout << "Enter students' name (exit : !): ";
-    while (cin >> ch) // Input 'ch' in list
+    for (int i = 0; i < count; i++)
     {
-        if (ch == "!"){break;}
-        Student.push_back(ch);
+        cout << "Enter a name : ";
+        cin >> name;
+        cout << "Enter a " << name << "'s ID : ";
+        cin >> ID;
+        Student_ID[name] = ID;
     }
-    print(Student, it);
+    cout << endl;
+    print(Student_ID, it);
 
-    while(true) // Change list with erasing, inserting.
+    while(true)
     {
-        Is_it_number("What did you want? (1 : Erase, 2 : Insert, 3. Nothing) : ", select);
-        if (select == 1)
+        cout << "Enter a name of person that you want to know Student-ID (exit : Enter a '!'): ";
+        cin >> name;
+        if (name == "!")
         {
-            Del_value(Student, it);
-            print(Student, it);
+            cout << "Thank you" << endl;
+            break;
         }
         else
         {
-            if (select == 2)
+            it = Student_ID.begin();
+            while(true)
             {
-                Insert_value(Student, it);
-                print(Student, it);
-            }
-            else
-            {
-                if (select == 3)
+                if (it->first == name)
                 {
-                    cout << "Exit program!!" << endl;
+                    cout << name << "'s student-ID : " << it -> second << endl;
                     break;
                 }
                 else
                 {
-                    cout << "Please enter a number among 1, 2, 3" << endl;
+                    if (it == Student_ID.end())
+                    {
+                        cout << "This name isn' in a list" << endl;
+                        break;
+                    }
                 }
+                it++;
             }
+            
         }
     }
+    
+    
     return 0;
 }
