@@ -3,6 +3,22 @@
 #include <string>
 using namespace std;
 
+void showstack(stack <char> stk)
+{
+    stack <char> Reverse;
+    while(!stk.empty())
+    {
+        Reverse.push(stk.top());
+        stk.pop();
+    }
+    while(!Reverse.empty()) // print all
+    {
+        cout << Reverse.top();
+        Reverse.pop();
+    }
+    cout << endl << endl;
+}
+
 int main()
 {
     stack <char> palindrome;
@@ -20,7 +36,8 @@ int main()
             palindrome.push(ch);
         }
     }
-    
+    showstack(palindrome);
+    cout << "Reverse : ";
     while(!palindrome.empty()) // print all
     {
         ch = palindrome.top(); 
