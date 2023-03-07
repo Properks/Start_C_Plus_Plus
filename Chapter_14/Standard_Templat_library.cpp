@@ -1,33 +1,31 @@
 #include <iostream>
-#include <queue> // stack (pop and push)
-#include <string>
+#include <vector>
+#include <queue> // queue (it is different as stack. It Output(pop) the value that first input(puch))
+#include <functional>
 using namespace std;
 
 int main()
 {
-    queue <char> palindrome;
-    char ch;
-
-    cout << "Enter word or phrase (end : .): "; // Input
-    while(cin >> ch) // Input character onto the stack
+    int num;
+    priority_queue <int, vector<int>, greater<int> > Sort_num;
+    cout << "Enter numbers (exit : Any character): ";
+    while(cin >> num)
     {
-        if(ch == '.') // break
+        if (cin.fail() == 1)
         {
             break;
         }
         else
         {
-            palindrome.push(ch);
+            Sort_num.push(num);
         }
     }
-    
-    while(!palindrome.empty()) // print all
+    while(!Sort_num.empty())
     {
-        ch = palindrome.front(); 
-        cout << ch;
-        palindrome.pop();
+        cout << Sort_num.top() << ' ';
+        Sort_num.pop();
     }
     cout << endl;
-    
+
     return 0;
 }

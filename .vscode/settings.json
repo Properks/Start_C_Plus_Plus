@@ -63,6 +63,7 @@
         "algorithm": "cpp",
         "list": "cpp",
         "map": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "queue": "cpp"
     }
 }
