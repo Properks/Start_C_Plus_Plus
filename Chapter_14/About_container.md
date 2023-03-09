@@ -36,7 +36,6 @@
     Input : .push(data)
     Delete : .pop(data)
     Select data : .top() (but only one that is inputed at first)
-    Check : .empty()
 
 `priority_queue`
 
@@ -44,3 +43,11 @@
     priority_queue <type> name : descend
     priority_queue <type, vector<type>, greater<type> > name : ascend
     Set descending or ascending order regarless of order of entering
+
+Add
+
+    library.find(data) : Find a data in list(list, vector ...etc). If could't find data, return library.end()
+    library.begin() : return library's first iterator value
+    library.end() : return library's last iterator value
+    library.size() : return size of library
+    library.empty() : Check that library is empty.
