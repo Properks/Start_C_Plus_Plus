@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    int value1; // Declare valuable
+    int value1; // Declare variable
     cout << "Enter one number!! "; // Input one number
     cin >> value1;
 

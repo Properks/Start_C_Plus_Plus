@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    int value1, value2, result = 0; // Declare valuable
+    int value1, value2, result = 0; // Declare variable
     cout << "Enter two numbers that you want to know sum all number between these : "; // Input two numbers
     cin >> value1 >> value2;
 
